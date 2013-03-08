@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="SSViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n6F-WV-mmf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ygM-Fr-NZV">
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ygM-Fr-NZV" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="7eQ-bu-3NR"/>
+                            <constraint firstItem="ygM-Fr-NZV" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="FwP-sg-gEG"/>
+                            <constraint firstItem="ygM-Fr-NZV" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Ht4-Nf-jNt"/>
+                            <constraint firstItem="n6F-WV-mmf" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="IGf-Ch-tIV"/>
+                            <constraint firstItem="n6F-WV-mmf" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="nTZ-ZH-j18"/>
+                            <constraint firstItem="n6F-WV-mmf" firstAttribute="top" secondItem="ygM-Fr-NZV" secondAttribute="bottom" type="default" id="qru-tv-33l"/>
+                            <constraint firstItem="n6F-WV-mmf" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="wjI-mx-KRi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mySearchBar" destination="ygM-Fr-NZV" id="pXm-dV-4Ec"/>
+                        <outlet property="myTableView" destination="n6F-WV-mmf" id="qpl-PB-Caf"/>
+                        <outlet property="searchDisplayController" destination="8X5-eg-XWB" id="vAW-6q-WPz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="8X5-eg-XWB">
+                    <connections>
+                        <outlet property="delegate" destination="2" id="xta-4g-Bj9"/>
+                        <outlet property="searchContentsController" destination="2" id="ZGG-c6-5zL"/>
+                        <outlet property="searchResultsDataSource" destination="2" id="XGE-Op-ujE"/>
+                        <outlet property="searchResultsDelegate" destination="2" id="hgj-o4-0VC"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
