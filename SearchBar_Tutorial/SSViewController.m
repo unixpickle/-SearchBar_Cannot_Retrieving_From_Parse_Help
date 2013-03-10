@@ -26,15 +26,15 @@
     self.mySearchBar.delegate =self;
     self.myTableView.delegate = self;
     self.myTableView.dataSource=self;
-  
+    
     [self retrieveFromParse];
     
-
+    
 }
 
 - (void) retrieveFromParse {
     PFQuery *retrievePets = [PFQuery queryWithClassName:@"pets"];
-    [retrievePets  whereKeyExists:@"pets"];  
+    [retrievePets  whereKeyExists:@"pets"];
     
     [retrievePets findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -49,7 +49,7 @@
 
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1; 
+    return 1;
 }
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *) searchText{
     if (searchText.length ==0){
@@ -59,11 +59,17 @@
         
         
         filteredStrings=[[NSMutableArray alloc]init];
-        for(NSString *str in totalStrings) {
+        for(PFObject *element in totalStrings) {
+            NSString * str = [element objectForKey:@"pets"];
+            NSLog(@"%@", NSStringFromClass([element class])); // you thought that totalStrings
+            // contained NSString objects,
+            // but it contains PFObjects.
             NSRange stringRange =[str rangeOfString:searchText options:NSCaseInsensitiveSearch];
             
             if (stringRange.location !=NSNotFound) {
-                [filteredStrings addObject:str];
+                // you need to add the PFObject back to make your cellForRowAtIndexPath: method
+                // work.
+                [filteredStrings addObject:element]; // used to be :str
             }
         }
     }
@@ -82,20 +88,20 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-              
+    
     
     UITableViewCell *cell= [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
     if (!cell){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     if(!isFiltered){
-       
+        
         PFObject *tempObject =[totalStrings objectAtIndex: indexPath.row];
         cell.textLabel.text = [tempObject objectForKey:@"pets"];
     }
     else
     {
-      PFObject *tempObject2 =[filteredStrings objectAtIndex: indexPath.row];
+        PFObject *tempObject2 =[filteredStrings objectAtIndex: indexPath.row];
         cell.textLabel.text =[tempObject2  objectForKey:@"pets"];
     }
     return cell;
